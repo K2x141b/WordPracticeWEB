@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Word Practice</title>
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="body-grid u-dark-theme">
+    
+    <div class="menu">
+      <button class="menu__back-btn" id="menu__back-btn">╳</button>
+      <button class="menu__theme-btn" id="menu__theme-btn">
+        dunkel
+      </button>
+    </div>
+
+    <div class="wl-panel" id="wl-panel">
+    <p class="wl-panel__header">Wähle eine Wortliste aus</p>
+    <div class="wl-panel__div" id="wl-panel__div">
+      <!-- Rows of clickable word lists will be generated here -->
+    </div>
+    </div>
+
+    <div class="set-panel" id="set-panel">
+      <p>Einstellungen</p>
+      <p class="set-panel__btn" id="set-panel__lm-btn-n">Wörter</p>
+      <p class="set-panel__btn" id="set-panel__lm-btn-ll">ÜbungArtikel</p>
+      <button class="set-panel__btn" id="set-panel__reverse-btn">
+        Deutsch → Fremdsprache
+      </button>
+      <form name="set-panel__form">
+        <label for="set-panel__lm-form">Übungs Methode</label><br>
+        <select id="set-panel__lm-form" name="cars">
+          <option value="WORDS">Wörter</option>
+          <option value="ARTICLE">ÜbungArtikel</option>
+        </select>
+      </form>
+    </div>
+
+    <div class="prac-panel" id="prac-panel">
+      <p class="prac-panel__q-count" id="prac-panel__q-count"></p>
+
+      <p class="prac-panel__q-display" id="prac-panel__q-display">
+        Your question will appear here.
+      </p>
+
+      <textarea class="prac-panel__txt-input" id="prac-panel__txt-input" name="content"
+        rows="3" cols="30" autofocus></textarea>
+      <p class="prac-panel__btn-input" id="prac-panel__btn-le">le</p>
+      <p class="prac-panel__btn-input" id="prac-panel__btn-la">la</p>
+
+      <div class="prac-panel__fb-disp" id="prac-panel__fb-disp">
+        <p id="prac-panel__fb-A"></p>
+        <p id="prac-panel__fb-B"></p>
+      </div>
+
+      <div id="prac-panel__score-disp">
+        <h3 class="prac-panel__score-txt" id="prac-panel__score-txt">Score:</h3>
+        <div class="prac-panel__score-chart" id="prac-panel__score-chart"></div>
+      </div>
+    </div>
+
+    <script src="app.js" type="module"></script>
+  </body>
+</html>
