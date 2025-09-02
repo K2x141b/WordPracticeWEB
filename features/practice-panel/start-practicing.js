@@ -3,70 +3,43 @@ import { wordLists } from "../../database/word-lists.js";
 import { reverseBtnState } from "../settings-panel/reverse-btn.js";
 import { show, hide, setText } from "../../utils/show-hide.js";
 import { shuffleLists } from "../../utils/shuffle-lists.js";
+import { leLaParsing } from "../settings-panel/lelabutton.js";
 
-let selectedLearningMethod = state.selectedLearningMethod;
-let listData = state.listData;
 let question = "";
-let questions_practiced;
 let lengthOfWordlist;
-let currentList = [];
-let currentQuestionIndex = 0;
-let incorrectFull;
-let incorrect2;
 
 hide("prac-panel");
 
-export function startPracticing(language, listName) {
+export function startPracticing(selWordlistGroup, listName) {
 
-    selectedLearningMethod = document.forms["set-panel__form"]["set-panel__lm-form"].value;
+    state.selWordlistGroup = selWordlistGroup;
+    state.currentListName = listName;
 
-    listData = prepareWordlists(language, listName);
+    state.selectedLearningMethod = document.forms["set-panel__form"]["set-panel__lm-form"].value;
 
-    lengthOfWordlist = listData.questions.length;
-    
-    currentQuestionIndex = 0;
-    state.listData = listData;
-    incorrectFull = 0;
-    incorrect2 = 0;
-    questions_practiced = 0;
+    state.listData = prepareWordlists(selWordlistGroup, listName);
 
-    setText("prac-panel__q-count", `${lengthOfWordlist}`);
+    lengthOfWordlist = state.listData.questions.length;
 
-    hide("set-panel");
-    hide("wl-panel");
-    show("prac-panel");
+    state.wrongAnswers = 0;
+    state.practicedQuestions = 0;
 
-    hide("prac-panel__score-txt");
+    question = state.listData.questions[0];
+    state.currentQuestion = question;
 
-    // Do different things depending on learning method
-    if (selectedLearningMethod === "ARTICLE") {
-        show("prac-panel__btn-le");
-        show("prac-panel__btn-la");
-        hide("prac-panel__txt-input");
-    } else if (selectedLearningMethod === "WORDS") {
-        show("prac-panel__fb-disp");
-        hide("prac-panel__btn-le");
-        hide("prac-panel__btn-la");
-        setText("prac-panel__txt-input", " ");
-    }
+    state.practicedQuestions = 0;
+    state.practicedQuestions++;
 
-    question = listData.questions.shift();
-
-    currentQuestionIndex++;
-
-    setText("prac-panel__q-display", question);
-
-    setText("prac-panel__fb-A", "\u00A0");
-    setText("prac-panel__fb-B", "\u00A0");
+    prepareUI();
 }
 
 
-function prepareWordlists(language, listName) {
-    let listData = JSON.parse(JSON.stringify(wordLists[language][listName]));
-
+function prepareWordlists(selWordlistGroup, listName) {
+    let listData = JSON.parse(JSON.stringify(wordLists[selWordlistGroup][listName]));
+    
     [listData.questions, listData.answers] = shuffleLists(listData.questions, listData.answers);
 
-    if (selectedLearningMethod === "ARTICLE") { 
+    if (state.selectedLearningMethod === "ARTICLE") { 
         [listData.questions, listData.answers] = leLaParsing(listData.answers);
 
         if (listData.questions.length === 0) {
@@ -82,3 +55,26 @@ function prepareWordlists(language, listName) {
     return listData;
 }
 
+function prepareUI() {
+    hide("set-panel");
+    hide("wl-panel");
+    show("prac-panel");
+
+    hide("prac-panel__score-txt");
+
+    if (state.selectedLearningMethod === "ARTICLE") {
+        show("prac-panel__btn-le");
+        show("prac-panel__btn-la");
+        hide("prac-panel__txt-input");
+    } else if (state.selectedLearningMethod === "WORDS") {
+        show("prac-panel__fb-disp");
+        hide("prac-panel__btn-le");
+        hide("prac-panel__btn-la");
+        setText("prac-panel__txt-input", " ");
+    }
+
+    setText("prac-panel__q-count", `${lengthOfWordlist}`);
+    setText("prac-panel__q-display", question);
+    setText("prac-panel__fb-A", "\u00A0");
+    setText("prac-panel__fb-B", "\u00A0");
+}

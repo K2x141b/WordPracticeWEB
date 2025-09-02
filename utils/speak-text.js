@@ -27,7 +27,3 @@ export function speakText(text, voiceName = "Google Deutsch") {  // Default: Mic
   
     window.speechSynthesis.speak(utterance);
 }
-
-window.speechSynthesis.onvoiceschanged = function() {
-    console.log(speechSynthesis.getVoices());
-};

@@ -1,5 +1,11 @@
 export const state = {
     practiceState: "ANSWERING",
     selectedLearningMethod: "WORDS",
-    listData: null
+    reverseBtnState: 0,
+    selWordlistGroup: "",
+    listData: { questions: [], answers: [], },
+    countIncorrectAnswers: 0,
+    countMistakes: 0,
+    practicedQuestions: 0,
+    currentQuestion: ""
 }

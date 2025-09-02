@@ -1,4 +1,6 @@
-import { hide } from "../../utils/show-hide.js";
+import { hide, show } from "../../utils/show-hide.js";
+import { state } from "../../app/state.js";
+import { drawChart } from "./utils/draw-chart.js";
 
 export function endPractice() {
     // Make space for the accuracy chart
@@ -15,9 +17,8 @@ export function endPractice() {
     google.charts.load('current',{packages:['corechart']});
     google.charts.setOnLoadCallback(function() {
         const chartArray = [['Type', 'Count'], 
-                            ['fully correct', (start_active_list_size) - (incorrect2 + incorrectFull)],
-                            ["1 time wrong", incorrect2],
-                            ["2 times or more wrong", incorrectFull],
+                            ['Richtig:', (state.practicedQuestions) - (state.countIncorrectAnswers)],
+                            ["Falsch", state.countIncorrectAnswers],
                             ];
         drawChart(chartArray);
     });

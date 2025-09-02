@@ -14,7 +14,6 @@ import '../features/practice-panel/next-question.js';
 import '../features/practice-panel/start-practicing.js';
 
 import '../features/settings-panel/lelabutton.js';
-import '../features/settings-panel/lm_btns.js';
 import '../features/settings-panel/reverse-btn.js';
 
 import '../features/wordlist-panel/wl-panel.js';

@@ -7,23 +7,22 @@ import { leLaButton } from "../settings-panel/lelabutton.js";
 
 document.addEventListener('keydown', function(event) {eventKey(event);});
 
-let practiceState = state.practiceState;
 let sequence = "";
 
 function eventKey(event) {
     if (event.key === 'Enter') {
         sequence = "";
 
-        if (practiceState === "ANSWERING") {
+        if (state.practiceState === "ANSWERING") {
             checkAnswer();
             return
         }
 
-        if (!practiceState === "CHECKING") return;
+        if (!state.practiceState === "CHECKING") return;
 
         nextQuestion();
 
-        if (learning_method === 2) {
+        if (state.selectedLearningMethod === 2) {
             document.getElementById("prac-panel__btn-le").classList.remove("button-active")
             document.getElementById("prac-panel__btn-la").classList.remove("button-active")
         }

@@ -23,7 +23,7 @@ export function leLaButton(buttonType) {
 export function leLaParsing(words) {
     const articles = [];
     const nouns = [];
-    
+
     for (const word of words) {
         //console.log(word.match(/(?<=[\s])(?:le|la|les|un|une)(?=[\s])|\bl'\b/g))
         // See if there is an article in it

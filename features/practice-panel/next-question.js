@@ -1,37 +1,31 @@
-import { setText } from "../../utils/show-hide.js";
+import { state } from "../../app/state.js";
+import { setText, setColor } from "../../utils/show-hide.js";
+import { endPractice } from "./end-practice.js";
 
 export function nextQuestion() {
 
-    setText("prac-panel__q-count", "${currentList.questions.length}");
+    setText("prac-panel__q-count", `${state.listData.questions.length}`);
 
-    // Change the answer-display back to gray colors
-    let element = document.getElementById(`prac-panel__fb-disp`);
-    element.style.color = "var(--darkgrey)";
-    element.style.backgroundColor = "var(--lightgrey)";
-    element.style.borderColor = "var(--darkgrey)";
+    setColor("prac-panel__fb-disp", "var(--darkgrey)", "var(--lightgrey)", "var(--darkgrey)");
 
-    switch_x = 0;  // Reset to allow new answer checking
-
-    // Check if the list is empty
-    if (currentList.questions.length === 0) {
+    if (state.listData.questions.length === 0) {
         endPractice();
         return
     }
 
-    question = currentList.questions.shift();
-    currentQuestionIndex++;
+    state.practicedQuestions++;
 
-    setText("prac-panel__q-display", question);
+    setText("prac-panel__q-display", state.listData.questions[0]);
     setText("prac-panel__fb-A", "\u00A0");
     setText("prac-panel__fb-B", "\u00A0");
 
-    // Do different things depending on learning method
-    if (learning_method == 1) {
+    if (state.selectedLearningMethod === "WORDS") {
         setText("prac-panel__txt-input", "");
     }
 
-    // Speak the question if doing the list the opposite way
-    if (reverse === 1) {
-        speakText(question, wordLists[active_language].settings[0]); 
+    if (state.reverseBtnState === 1) {
+        speakText(state.listData.questions[0], wordLists[state.selWordlistGroup].settings[0]); 
     }
+
+    state.practiceState = "ANSWERING";
 }

@@ -1,3 +1,5 @@
+import { populateLanguageSelection } from "../wordlist-panel/wl-panel.js";
+
 document.getElementById('menu__back-btn').addEventListener('click', () => goBack());
 
 function goBack() {
