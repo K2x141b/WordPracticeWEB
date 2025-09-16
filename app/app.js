@@ -1,0 +1,16 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+require("../features/keyboard/keyboard.js");
+require("../features/menu/buttons.js");
+require("../features/practice-panel/utils/draw-chart.js");
+require("../features/practice-panel/check-anwser.js");
+require("../features/practice-panel/end-practice.js");
+require("../features/practice-panel/display-question.js");
+require("../features/practice-panel/start-practicing.js");
+require("../features/settings-panel/lelabutton.js");
+require("../features/settings-panel/reverse-btn.js");
+require("../features/wordlist-panel/wl-panel.js");
+require("../features/wordlist-panel/wl-file-paths.js");
+require("../utils/levenshtein.js");
+require("../utils/shuffle-lists.js");
+require("../utils/speak-text.js");
